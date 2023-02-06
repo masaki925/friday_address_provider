@@ -4,7 +4,7 @@ from address_provider.modules.abstract_class import MyConverter
 from address_provider.models import MyData
 
 
-class WesternAddressConverter(MyConverter):
+class GermanAddressConverter(MyConverter):
     def convert(self, address: str) -> MyData:
         number_start_at = re.search(r'\d+', address).start()
         street = address[:number_start_at].strip()
@@ -14,5 +14,5 @@ class WesternAddressConverter(MyConverter):
 
 
 if __name__ == '__main__':
-    wac = WesternAddressConverter()
-    print(wac.convert("something 3"))
+    wac = GermanAddressConverter()
+    print(wac.convert("Am Bächle 23"))

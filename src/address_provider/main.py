@@ -3,8 +3,8 @@ from .modules.address_converter_facade import AddressConverterFacade
 
 
 def run(address: str) -> str:
-    acf = AddressConverterFacade()
-    res = acf.convert(address)
+    acf = AddressConverterFacade(address)
+    res = acf.convert()
     return res.dict()
 
 

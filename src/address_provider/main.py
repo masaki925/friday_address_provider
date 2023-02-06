@@ -1,18 +1,12 @@
-from pydantic import BaseModel
+from .models import MyData
+from .modules.address_converter_facade import AddressConverterFacade
 
 
-class MyData(BaseModel):
-    street: str
-    housenumber: str
-
-
-class AddressConverter:
-    def run(self, address: str) -> MyData:
-        sample_data = {"street": "Winterallee", "housenumber": "3"}
-        return MyData(**sample_data)
+def run(address: str) -> str:
+    acf = AddressConverterFacade()
+    res = acf.convert(address)
+    return res.dict()
 
 
 if __name__ == "__main__":
-    ac = AddressConverter()
-    res = ac.run("Winterallee 3")
-    print(res)
+    print(run("Winterallee 3"))

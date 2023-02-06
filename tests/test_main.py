@@ -1,8 +1,7 @@
-from address_provider.main import AddressConverter, MyData
+import address_provider.main
 
 
 def test_main():
-    ac = AddressConverter()
-    assert ac.run("Winterallee 3") == MyData(
-        **{"street": "Winterallee", "housenumber": "3"}
-    )
+    assert address_provider.main.run("Winterallee 3") == {
+        "street": "Winterallee", "housenumber": "3"
+    }

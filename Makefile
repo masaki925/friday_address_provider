@@ -4,7 +4,10 @@
 
 ADDRESS = "Winterallee 3"
 
-test: ## run test
+init: ## init
+	poetry install
+
+test: init ## run test
 	poetry run pytest -v tests
 
 run: ## run convertion (e.g. $ make run ADDRESS="Winterallee 3")

@@ -4,6 +4,7 @@ from address_provider.models import MyData
 
 from address_provider.modules.western_address_converter import WesternAddressConverter
 from address_provider.modules.german_address_converter import GermanAddressConverter
+from address_provider.modules.french_address_converter import FrenchAddressConverter
 
 
 class AddressConverterFacade():
@@ -18,6 +19,8 @@ class AddressConverterFacade():
 
         if re.search('ä', self.address):
             converter = GermanAddressConverter()
+        elif re.search(' rue ', self.address):
+            converter = FrenchAddressConverter()
         else:
             converter = WesternAddressConverter()
         return converter

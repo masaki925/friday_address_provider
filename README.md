@@ -4,16 +4,16 @@ FRIDAY code challenge: https://gist.github.com/frank-kutzey-friday/76f9bf6b5b890
 
 ## Overview
 
-- street notation depends on the address of each country/region
-- even in the same country, there are some different notation for same address
+- Street notation depends on the address of each country/region
+- Even in the same country, there are some different notation for same address
   - e.g. `3丁目` == `三丁目`
-- so conversion process could be complex.
-- to mitigate the complex, divide converters for each countries/regions, then contain complex logic into each converters.
-- we applied `Facade pattern` so that main program can use converters without knowing the complex logics, but just call `convert()` method and get `MyData` result.
+- So the conversion process could be complex.
+- To mitigate the complex, I've divided converters for each country/region, then contained complex logic into each converter.
+- I've applied the `Facade pattern` so that the main program can use converters without knowing the complex logics, but just call the `convert()` method and get the `MyData` result.
 
 ## How to use
 
-you can run with make commands as below:
+You can run with make commands as below:
 
 ```sh
 $ cd address_provider
@@ -22,7 +22,7 @@ poetry run python src/address_provider/main.py --address "Winterallee 3"
 {'street': 'Winterallee', 'housenumber': '3'}
 ```
 
-you can run test as well:
+You can run test as well:
 
 ```sh
 $ make test
@@ -47,16 +47,21 @@ tests/test_main.py::test_main2[Auf der Vogelwiese 23 b-expected1] PASSED        
 
 - `Poetry` to manage the dependencies
 - `Pytest` to write a unit test
-- `abc` to define Abstract Model to have Polimophic classes
-  - by using it, we can ensure that each derivative converters have same I/F such as `convert()` takes in string to convert, and returns `MyData` as the result.
+- `abc` to define Abstract Model to have Polymophic classes
+  - By using it, we can ensure that each derivative converter has the same I/F such as `convert()` takes in string to convert, and returns `MyData` as the result.
 - `Facade pattern` for `Open Closed` principle.
-  - by using it, we can define a new converters following a new format of address notation without changing existing converters.
+  - By using it, we can define new converters following a new format of address notation without changing existing converters.
 
 ## What I want to have in future
 
-- Creating Detector who can detect which kind of notation is the address, and assign a suitable Converter.
+- Creating Detector that can detect which kind of notation is the address, and assign a suitable Converter.
+  - We need to take into account the same address but in other country?
+  - As far as the requirement, we don't have to. creating the Converter for each languages is one another option.
+  - If possible, getting country code as additional information would be nice to have.
 - Docker environment
-- Deinfe CI/CD process
+- Define CI/CD process
+  - Run the test each CI process.
+  - Currently, we only have `test_main.py` but we can separate it into the one for each converter.
 - Terraform or other IaC tools to manage the infrastructure
 
 ## FYI
